@@ -1,4 +1,82 @@
 extends layout
 
 block content
-	h1 Hello Boulder!
+	h1 Welcome to the CUBE.
+	ul
+		li: button.venue-button.btn-lg.btn-default.btn Madison Square Gardens
+		li: button.venue-button.btn-lg.btn-default.btn Jones Beach
+		li: button.venue-button.btn-lg.btn-default.btn Red Rocks
+		li: button.venue-button.btn-lg.btn-default.btn The Gorge @ George
+
+	#cube
+			#front.step(data-z="-1000", data-up="#top", data-down="#bottom", data-scale="1")
+				//- | Madison Square Gardens
+			#right.step(data-rotate-y="90", data-z="-1500", data-x="500", data-up="#top", data-down="#bottom", data-scale='1')
+				//- | Red Rocks
+			#back.step(data-rotate-y="180", data-z="-2000", data-up="#top", data-down="#bottom", data-scale='1')
+				//- | Jones Beach
+			#left.step(data-rotate-y="270", data-z="-1500", data-x="-500", data-up="#top", data-down="#bottom", data-scale='1')
+				//- | Gorge @ George
+			#top.step(data-rotate-x="90", data-z="-1500", data-y="-500", data-up="#back", data-down="#front", data-scale='1')
+				| 
+			#bottom.step(data-rotate-x="270", data-z="-1500", data-y="500", data-up="#front", data-down="#back", data-scale='1')
+				| 
+	//- #cube2
+	//- 		#front2.step(data-z="-1000", data-up="#top", data-down="#bottom", data-scale=".01")
+	//- 			//- | Madison Square Gardens
+	//- 		#right2.step(data-rotate-y="90", data-z="-1500", data-x="500", data-up="#top", data-down="#bottom", data-scale='.01')
+	//- 			//- | Red Rocks
+	//- 		#back2.step(data-rotate-y="180", data-z="-2000", data-up="#top", data-down="#bottom", data-scale='.01')
+	//- 			//- | Jones Beach
+	//- 		#left2.step(data-rotate-y="270", data-z="-1500", data-x="-500", data-up="#top", data-down="#bottom", data-scale='.01')
+	//- 			//- | Gorge @ George
+	//- 		#top2.step(data-rotate-x="90", data-z="-1500", data-y="-500", data-up="#back", data-down="#front", data-scale='.01')
+	//- 			| 
+	//- 		#bottom2.step(data-rotate-x="270", data-z="-1500", data-y="500", data-up="#front", data-down="#back", data-scale='.01')
+	//- 			| 
+
+	script(type="text/javascript").
+		$(function() {
+		var cube = $('#cube');
+		$.jmpress("initStep", function(step, eventData) {
+		eventData.stepData.up = eventData.data.up;
+		eventData.stepData.down = eventData.data.down;
+		});
+		$.jmpress("register", "up", function() {
+		var stepData = cube.jmpress("active").data("stepData");
+		if(stepData.up)
+		cube.jmpress("select", stepData.up);
+		});
+		$.jmpress("register", "down", function() {
+		var stepData = cube.jmpress("active").data("stepData");
+		if(stepData.down)
+		cube.jmpress("select", stepData.down);
+		});
+
+		$.jmpress("register", "space", function() {
+		var stepData = cube.jmpress("active").data("stepData");
+		if(stepData.down)
+		cube.jmpress("select", stepData.down);
+		});
+
+		cube.jmpress({
+		viewPort: {
+		width: 2000,
+		height: 2000
+		},
+		keyboard: {
+		keys: {
+		38: "up",
+		40: "down",
+		32: "space"
+		}
+		}
+		});
+		cube.jmpress("route", ["#left", "#front"]);
+		cube.jmpress("route", ["#top", "#right"], true);
+		cube.jmpress("route", ["#top", "#left"], true, true);
+		cube.jmpress("route", ["#bottom", "#left"], true, true);
+		cube.jmpress("route", ["#bottom", "#right"], true);
+		});
+
+
