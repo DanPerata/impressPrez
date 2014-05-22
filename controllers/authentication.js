@@ -8,9 +8,10 @@ var performLogin = function(req, res, next, user){
   req.login(user, function(err){
     // If there was an error, allow execution to move to the next middleware
     if(err) return next(err);
-
     // Otherwise, send the user to the homepage.
     return res.redirect('/');  //This will become a res.send with data that can be used inside of AJAX callback
+    // console.log('perform login: ', req.body);
+    // return res.send({user: user});
   });
 };
 
@@ -18,17 +19,17 @@ var authenticationController = {
 
 	// The route-handler for the /auth/login route. Meant to be
 	// a page view that only shows login forms
-	login: function(req, res){
-	// Render the login jade template.
-	// We are using the "flash" system, which are variables
-	// that can be sent from view to view and are removed
-	// after use. Useful for quick messages like "failed to login."
-	// In this case, we pull any existing flash message id'd as "error"
-	// and pass it to the view.
-	res.render('login', {
-	  error: req.flash('error')
-	});
-	},
+	// login: function(req, res){
+	// // Render the login jade template.
+	// // We are using the "flash" system, which are variables
+	// // that can be sent from view to view and are removed
+	// // after use. Useful for quick messages like "failed to login."
+	// // In this case, we pull any existing flash message id'd as "error"
+	// // and pass it to the view.
+	// res.render('login', {
+	//   error: req.flash('error')
+	// });
+	// },
 	processLogin: function(req, res, next){
 
 		// Passport's "authenticate" method returns a method, so we store it
@@ -46,7 +47,7 @@ var authenticationController = {
 			// to that handler.
 			if(!user) {
 				req.flash('error', 'Error logging in. Please try again.');
-				return res.redirect('/auth/login');
+				return res.send('sign in error');
 			}
 
 			// If we make it this far, the user has correctly authenticated with passport
@@ -58,16 +59,15 @@ var authenticationController = {
 		authFunction(req, res, next);
 	},
 	processSignup: function(req, res, next){
-
 	// Create a new instance of the User model with the data passed to this
 	// handler. By using "param," we can safely assume that this route will
 	// work regardless of how the data is sent (post, get).
 	// It is safer to send as post, however, because the actual data won't
 	// show up in browser history.
 	var user = new User({
-	  username: req.param('username'),
-	  password: req.param('password'),
-	  email: req.param('email')
+	  username: req.body.username,
+	  password: req.body.password
+	  // email: req.param('email')
 	});
 
 	// Now that the user is created, we'll attempt to save them to the
@@ -105,7 +105,7 @@ var authenticationController = {
 	    req.logout();
 
 	    // Redirect back to the login page
-	    res.redirect('/auth/login');
+	    res.redirect('/');
 	  }
 	};
 

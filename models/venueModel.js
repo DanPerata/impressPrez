@@ -21,9 +21,9 @@ module.exports = {
 	// Can't use map. Need to find a different way without re-saving the venue objects 
 	// possibly populate the user's venue array when the user logs in?
 	filterVenues: function(venueIdArray, cb) {
-		venueIdArray.map(function(venueID) {
-			Venue.findById(venueID, cb);
-		})
+		Venue.find({
+			'_id': {$in: venueIdArray}
+		}, cb);
 	}
 
 }

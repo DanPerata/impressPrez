@@ -62,38 +62,16 @@ userSchema.methods.comparePassword = function(candidatePassword, next){
   });
 };
 
+// Finds and updates the given user by adding in the venue objectId
+// to the user's favorite venues array
+userSchema.methods.addFavoriteVenue = function(venueID, userID, cb) {
+  User.update( { "_id" : userID }, { $push: {"favVenues" : venueID}}, cb);
+}
 // Our user model
 var User = mongoose.model('user', userSchema);
 
-// Finds and updates the given user by adding in the venue objectId
-// to the user's favorite venues array
-var addFavoriteVenue = function(venueID, userID, cb) {
-  User.update( { "_id" : userID }, { $push: {"favVenues" : venueID}}, cb);
-}
-
-
-
-// // Added test user
-// var addTestUser = function(){
-//   User.create({username: 'testUser3', password: 'password2'});
-// };
-
-// addTestUser();
-
-// // Test to see if the venue filter will work
-// User.findById("537d4decd066f1272806e999", function(err, user) {
-//   console.log(user);
-//   Venue.filterVenues(user.favVenues, function(err, venue) {
-//     console.log(venue);
-//   })
-// })
-
-
 // Make user model available through exports/require
-module.exports = {
-  user: User,
-  addFavorite: addFavoriteVenue
-}
+module.exports = User;
 
 
 

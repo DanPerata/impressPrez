@@ -35,7 +35,7 @@ app.get('/venue', venueController.get);
 app.post('/venue', venueController.post);
 
 // Our get request for viewing the login page
-app.get('/auth/login', authenticationController.login);
+// app.get('/auth/login', authenticationController.login);
 
 // Post received from submitting the login form
 app.post('/auth/login', authenticationController.processLogin);

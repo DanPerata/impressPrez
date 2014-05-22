@@ -1,4 +1,15 @@
 extends layout
 
 block content
+	include login
 	h1 Hello Boulder!
+
+	if loggedIn
+		h1= user.username
+
+		ul
+			for venue in user.favVenues
+				li= venue
+
+
+	
