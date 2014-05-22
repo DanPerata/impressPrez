@@ -1,4 +1,58 @@
 extends layout
 
 block content
-	h1 Hello Boulder!
+	h1 Welcome to the CUBE.
+
+	#cube
+			#front.step(data-z="-1000", data-up="#top", data-down="#bottom", data-scale="1")
+				| FRONT
+			#right.step(data-rotate-y="90", data-z="-1500", data-x="500", data-up="#top", data-down="#bottom")
+				| RIGHT
+			#back.step(data-rotate-y="180", data-z="-2000", data-up="#top", data-down="#bottom")
+				| BACK
+			#left.step(data-rotate-y="270", data-z="-1500", data-x="-500", data-up="#top", data-down="#bottom")
+				| LEFT
+			#top.step(data-rotate-x="90", data-z="-1500", data-y="-500", data-up="#back", data-down="#front")
+				| TOP
+			#bottom.step(data-rotate-x="270", data-z="-1500", data-y="500", data-up="#front", data-down="#back")
+				| BOTTOM
+	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+
+	script(src="http://cdnjs.cloudflare.com/ajax/libs/jmpress/0.4.5/jmpress.min.js")
+	script(type="text/javascript").
+		$(function() {
+		var cube = $('#cube');
+		$.jmpress("initStep", function(step, eventData) {
+		eventData.stepData.up = eventData.data.up;
+		eventData.stepData.down = eventData.data.down;
+		});
+		$.jmpress("register", "up", function() {
+		var stepData = cube.jmpress("active").data("stepData");
+		if(stepData.up)
+		cube.jmpress("select", stepData.up);
+		});
+		$.jmpress("register", "down", function() {
+		var stepData = cube.jmpress("active").data("stepData");
+		if(stepData.down)
+		cube.jmpress("select", stepData.down);
+		});
+		cube.jmpress({
+		viewPort: {
+		width: 2000,
+		height: 2000
+		},
+		keyboard: {
+		keys: {
+		38: "up",
+		40: "down"
+		}
+		}
+		});
+		cube.jmpress("route", ["#left", "#front"]);
+		cube.jmpress("route", ["#top", "#right"], true);
+		cube.jmpress("route", ["#top", "#left"], true, true);
+		cube.jmpress("route", ["#bottom", "#left"], true, true);
+		cube.jmpress("route", ["#bottom", "#right"], true);
+		});
+
+
