@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Band = mongoose.model('band', {
 	name: String,
-	genre: String
+	image: String
 });
 
 module.exports = Band;

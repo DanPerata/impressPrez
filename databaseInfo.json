@@ -1,1 +1,4 @@
-[{ "_id" : { "$oid" : "537ced6ab6e7e824f164092a" }, "name" : "Red Rocks Amphitheater" },{ "_id" : { "$oid" : "537e5270ac4490496227892c" }, "name" : "Gorge" },{ "_id" : { "$oid" : "537e5270ac4490496227892d" }, "name" : "Madison Square Garden" }]
+[{ "_id" : { "$oid" : "537ced6ab6e7e824f164092a" }, "name" : "Red Rocks Amphitheater", "Location": "Morrison, CO", "bands": "[]"},
+{ "_id" : { "$oid" : "537e5270ac4490496227892c" }, "name" : "Gorge", "Location": "George, WA", "bands": "[]" },
+{ "_id" : { "$oid" : "537e5270ac4490496227892d" }, "name" : "Madison Square Garden", "Location": "New York, NY", "bands": "[]" },
+{"name": "Jones Beach Amphitheater", "Location": "Wantagh, NY", "bands": "[]"}]
