@@ -1,4 +1,5 @@
 var Venue = require('../models/venueModel.js');
+var User = require('../models/user.js');
 
 var venueController = {
 	get: function(req,res){
@@ -18,7 +19,14 @@ var venueController = {
 			})
 	},
 	post: function(req,res){
-		
+		venueId = req.body.venueId;
+		userId = req.user._id;
+		console.log('venueId is ' + venueId + '. userId is ' + userId);
+		User.findById(req.user._id, function(err, currUser) {
+			currUser.addFavoriteVenue(venueId, userId, function(){
+				console.log('redirecting');
+			})
+		})
 	}
 };
 

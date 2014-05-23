@@ -68,7 +68,9 @@ userSchema.methods.comparePassword = function(candidatePassword, next){
 // Finds and updates the given user by adding in the venue objectId
 // to the user's favorite venues array
 userSchema.methods.addFavoriteVenue = function(venueID, userID, cb) {
-  User.update( { "_id" : userID }, { $push: {"favVenues" : venueID}}, cb);
+  User.update( { "_id" : this._id }, { $push: {"favVenues" : venueID}}, cb);
+  // this.save
+  // this.favVenues.push(venueID);
 }
 // Our user model
 var User = mongoose.model('user', userSchema);

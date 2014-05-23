@@ -11,18 +11,4 @@ var Venue = mongoose.model('venue', {
 });
 
 
-
-
-
-
-
 module.exports = Venue;
-
-
-	// filterVenues: function(venueIdArray, cb) {
-	// 	Venue.find({
-	// 		'_id': {$in: venueIdArray}
-	// 	}, cb);
-	// }
-
-// }

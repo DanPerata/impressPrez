@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	include login
+	div.all-venues
+		h1 All Venues
+		for venue in venueArray
+			button.venue-button(data-id = '#{venue._id}')= venue.name
+			if loggedIn
+				button.fav-button(data-id = '#{venue._id}') Add #{venue.name} to favorites
+	if loggedIn
+		button.show-favs #{user.username} Favorites
+		div.fav-venues
+			h1 Favorites
+			for venue in user.favVenues
+				button.venue-button(data-id = '#{venue._id}')= venue.name
+	
+
+		
+
+
+
+	
