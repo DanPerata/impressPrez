@@ -13,7 +13,10 @@ var userSchema = mongoose.Schema({
     required: true
   },
   favVenues: {
-  	type: [String],
+  	type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Venue'
+    }],
   	required: false
   }
 });
