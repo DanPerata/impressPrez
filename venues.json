@@ -1,0 +1,4 @@
+[{ "_id" : { "$oid" : "537ced6ab6e7e824f164092a" }, "name" : "Red Rocks Amphitheater", "Location": "Morrison, CO", "bands": ["537f5f913aa2ddc2d450ba7b","537f5f913aa2ddc2d450ba7c","537f5f913aa2ddc2d450ba7d","537f5f913aa2ddc2d450ba7e"]},
+{ "_id" : { "$oid" : "537e5270ac4490496227892c" }, "name" : "Gorge", "Location" : "George, WA", "bands" : ["537f5f913aa2ddc2d450ba7f","537f5f913aa2ddc2d450ba80","537f5f913aa2ddc2d450ba81","537f5f913aa2ddc2d450ba82"] },
+{ "_id" : { "$oid" : "537e5270ac4490496227892d" }, "name" : "Madison Square Garden", "Location" : "New York, NY", "bands" : ["537f5f913aa2ddc2d450ba83","537f5f913aa2ddc2d450ba84","537f5f913aa2ddc2d450ba85","537f5f913aa2ddc2d450ba86"] },
+{ "_id" : { "$oid" : "537f5ef83aa2ddc2d450ba7a" }, "name" : "Jones Beach Amphitheater", "Location" : "Wantagh, NY", "bands" : ["537f5f913aa2ddc2d450ba87","537f5f913aa2ddc2d450ba88","537f5f913aa2ddc2d450ba89"] }]

@@ -1,0 +1,21 @@
+#signinModal.modal.fade
+    .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Sign In or Sign Up
+          .modal-body
+            h2 Sign Up
+            form(method="post" action="/auth/signup")
+              input(type="text" name="username" placeholder="User Name")
+              input(type="password" name="password" placeholder="Password")
+              input(type="submit")
+            h2 Sign In
+            form(method="post" action="/auth/login")
+              input(type="text" name="username" placeholder="User Name")
+              input(type="password" name="password" placeholder="Password")
+              input(type="submit")
+          .modal-footer
+
+button.btn.btn-success(data-toggle="modal" data-target="#signinModal") Sign In
+a.btn.btn-info(href="/auth/logout") Logout

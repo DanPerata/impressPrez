@@ -2,45 +2,58 @@ extends layout
 
 block content
 	div.page-container
-		h1.header Welcome to the CUBE.
-		div.venue-container
-			p
-				button.venue-button.btn-lg.btn-default.btn Madison Square Gardens
-				p
-					button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
-		div.venue-container
-			p
-				button.venue-button.btn-lg.btn-default.btn Jones Beach
-				p
-					button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
-		div.venue-container
-			P
-				button.venue-button.btn-lg.btn-default.btn Red Rocks
-				p
-					button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
-		div.venue-container		
-			p
-				button.venue-button.btn-lg.btn-default.btn The Gorge @ George
-				p
-					button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
+		include login
 
+		h1.header Welcome to the CUBE.
+		div.all-venues
+			for venue in venueArray
+				div.venue-container
+					p
+						button.venue-button.btn-lg.btn-default.btn(data-id = '#{venue._id}')= venue.name
+					if loggedIn
+						p
+							button.fav-button.btn-med.btn-default.btn(data-id = '#{venue._id}') Add to favorites
+
+		//- div.venue-container
+		//- 	p
+		//- 		button.venue-button.btn-lg.btn-default.btn Madison Square Gardens
+		//- 		p
+		//- 			button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
+		//- div.venue-container
+		//- 	p
+		//- 		button.venue-button.btn-lg.btn-default.btn Jones Beach
+		//- 		p
+		//- 			button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
+		//- div.venue-container
+		//- 	P
+		//- 		button.venue-button.btn-lg.btn-default.btn Red Rocks
+		//- 		p
+		//- 			button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
+		//- div.venue-container		
+		//- 	p
+		//- 		button.venue-button.btn-lg.btn-default.btn The Gorge @ George
+		//- 		p
+		//- 			button.fav-button.btn-med.btn-default.btn Add Venue To Favorites
 		div.favorites
 			h2.fav-header Favorite Venues
-				ul
-					li
+			if loggedIn
+				//- button.show-favs #{user.username} Favorites
+				for venue in user.favVenues
+					button.venue-button.btn.btn-default(data-id = '#{venue._id}')= venue.name
+
 
 		#cube
-				#front.step(data-z="-1000", data-up="#top", data-down="#bottom", data-scale="1") 1
+				#front.step(data-z="-1000", data-up="#top", data-down="#bottom", data-scale="1") 
 					//- | Madison Square Gardens
-				#right.step(data-rotate-y="90", data-z="-1500", data-x="500", data-up="#top", data-down="#bottom", data-scale='1') 2
+				#right.step(data-rotate-y="90", data-z="-1500", data-x="500", data-up="#top", data-down="#bottom", data-scale='1')
 					//- | Red Rocks
-				#back.step(data-rotate-y="180", data-z="-2000", data-up="#top", data-down="#bottom", data-scale='1') 3
+				#back.step(data-rotate-y="180", data-z="-2000", data-up="#top", data-down="#bottom", data-scale='1')
 					//- | Jones Beach
-				#left.step(data-rotate-y="270", data-z="-1500", data-x="-500", data-up="#top", data-down="#bottom", data-scale='1') 4
+				#left.step(data-rotate-y="270", data-z="-1500", data-x="-500", data-up="#top", data-down="#bottom", data-scale='1')
 					//- | Gorge @ George
-				#top.step(data-rotate-x="90", data-z="-1500", data-y="-500", data-up="#back", data-down="#front", data-scale='1') top
+				#top.step(data-rotate-x="90", data-z="-1500", data-y="-500", data-up="#back", data-down="#front", data-scale='1')
 					| 
-				#bottom.step(data-rotate-x="270", data-z="-1500", data-y="500", data-up="#front", data-down="#back", data-scale='1') bottom
+				#bottom.step(data-rotate-x="270", data-z="-1500", data-y="500", data-up="#front", data-down="#back", data-scale='1')
 					| 
 		//- #cube2
 		//- 		#front2.step(data-z="-1000", data-up="#top", data-down="#bottom", data-scale=".01")
@@ -74,11 +87,11 @@ block content
 			cube.jmpress("select", stepData.down);
 			});
 
-			$.jmpress("register", "space", function() {
-			var stepData = cube.jmpress("active").data("stepData");
-			if(stepData.down)
-			cube.jmpress("select", stepData.down);
-			});
+			//$.jmpress("register", "space", function() {
+			//var stepData = cube.jmpress("active").data("stepData");
+			//if(stepData.down)
+			//cube.jmpress("select", stepData.down);
+			//});
 
 			cube.jmpress({
 			viewPort: {
@@ -88,8 +101,8 @@ block content
 			keyboard: {
 			keys: {
 			38: "up",
-			40: "down",
-			32: "space"
+			40: "down"
+			//- 32: "space"
 			}
 			}
 			});
